@@ -18,9 +18,11 @@
 #
 ---
 include:
+  # Left half with ZMK Studio support
   - board: blecorne_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
     shield: nice_view
+  # Right half
   - board: blecorne_right
     shield: nice_view
