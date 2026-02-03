@@ -1,0 +1,203 @@
+/*
+ * ZMK Keymap - Converted from Vial QMK
+ * Boardsource Unicorne / Wireless Corne
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+/ {
+    /* ========== MACROS ========== */
+    macros {
+        // M0: Ctrl+A (select all)
+        m_ctrl_a: m_ctrl_a {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(A)>;
+        };
+
+        // M1-M10: Cmd+1 through Cmd+0 (workspace/tab switching)
+        m_cmd_1: m_cmd_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N1)>;
+        };
+        m_cmd_2: m_cmd_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N2)>;
+        };
+        m_cmd_3: m_cmd_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N3)>;
+        };
+        m_cmd_4: m_cmd_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N4)>;
+        };
+        m_cmd_5: m_cmd_5 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N5)>;
+        };
+        m_cmd_6: m_cmd_6 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N6)>;
+        };
+        m_cmd_7: m_cmd_7 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N7)>;
+        };
+        m_cmd_8: m_cmd_8 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N8)>;
+        };
+        m_cmd_9: m_cmd_9 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N9)>;
+        };
+        m_cmd_0: m_cmd_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(N0)>;
+        };
+    };
+
+    /* ========== BEHAVIORS ========== */
+    behaviors {
+        // Hold-tap for GUI(hold)/Enter(tap) - left thumb
+        gui_ent: gui_enter {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        // Layer-tap for Layer 4(hold)/Space(tap) - right thumb
+        lt4_spc: lt4_space {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
+    /* ========== KEYMAP ========== */
+    keymap {
+        compatible = "zmk,keymap";
+
+        /* ================================================
+         * LAYER 0: Base QWERTY
+         * ================================================
+         * ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+         * │ TAB │  Q  │  W  │  E  │  R  │  T  │   │  Y  │  U  │  I  │  O  │  P  │ ESC │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │CTRL │  A  │  S  │  D  │  F  │  G  │   │  H  │  J  │  K  │  L  │  ;  │  '  │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │SHFT │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │ MEH │
+         * └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+         *                   │ MO2 │ ALT │GUI/⏎│   │LT4/␣│BSPC │ MO3 │
+         *                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
+         */
+        default_layer {
+            bindings = <
+   &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O    &kp P     &kp ESC
+   &kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sk LC(LA(LGUI))
+                     &mo 2  &kp LALT  &gui_ent LGUI RET    &lt4_spc 4 SPACE  &kp BSPC  &mo 3
+            >;
+        };
+
+        /* ================================================
+         * LAYER 1: Alternate (Toggle via TG(1) from Layer 3)
+         * ================================================
+         * Almost entirely transparent - only left thumb changes to H
+         */
+        alt_layer {
+            bindings = <
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+                   &kp H   &kp LALT  &trans            &trans  &trans  &trans
+            >;
+        };
+
+        /* ================================================
+         * LAYER 2: Numbers & Symbols
+         * ================================================
+         * ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+         * │     │  !  │  @  │  #  │  $  │  %  │   │  ^  │  &  │  *  │  (  │  )  │  \  │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │ ^A  │  1  │  2  │  3  │  4  │  5  │   │  -  │  =  │  `  │  [  │  ]  │  |  │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │     │  6  │  7  │  8  │  9  │  0  │   │  _  │  +  │  ~  │  {  │  }  │     │
+         * └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+         *                   │ ### │     │     │   │     │     │     │
+         *                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
+         */
+        num_sym_layer {
+            bindings = <
+   &trans     &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET  &kp AMPS   &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSLH
+   &m_ctrl_a  &kp N1    &kp N2  &kp N3    &kp N4    &kp N5         &kp MINUS  &kp EQUAL  &kp GRAVE  &kp LBKT  &kp RBKT  &kp PIPE
+   &trans     &kp N6    &kp N7  &kp N8    &kp N9    &kp N0         &kp UNDER  &kp PLUS   &kp TILDE  &kp LBRC  &kp RBRC  &trans
+                        &trans  &trans    &trans                   &trans     &trans     &trans
+            >;
+        };
+
+        /* ================================================
+         * LAYER 3: Media, F-keys, Macros, Bluetooth
+         * ================================================
+         * ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+         * │BTCLR│ BT1 │ BT2 │ BT3 │ BT4 │ BT5 │   │     │ VDN │ VUP │BRIDN│BRIUP│     │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │     │ ⌘1  │ ⌘2  │ ⌘3  │ ⌘4  │ ⌘5  │   │     │     │     │     │     │TG(1)│
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │     │ ⌘6  │ ⌘7  │ ⌘8  │ ⌘9  │ ⌘0  │   │ F6  │ F7  │ F8  │ F9  │     │     │
+         * └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+         *                   │     │     │     │   │     │     │ ### │
+         *                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
+         */
+        media_layer {
+            bindings = <
+   &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4      &trans  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_DN  &kp C_BRI_UP  &trans
+   &trans      &m_cmd_1      &m_cmd_2      &m_cmd_3      &m_cmd_4      &m_cmd_5          &trans  &trans        &trans        &trans        &trans        &tog 1
+   &trans      &m_cmd_6      &m_cmd_7      &m_cmd_8      &m_cmd_9      &m_cmd_0          &kp F6  &kp F7        &kp F8        &kp F9        &trans        &trans
+                             &trans        &trans        &trans                          &trans  &trans        &trans
+            >;
+        };
+
+        /* ================================================
+         * LAYER 4: Hyper Layer (LT4 from Space)
+         * ================================================
+         * ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+         * │ TAB │ H-Q │ H-W │ H-E │ H-R │ H-T │   │ H-Y │ H-U │ H-I │ H-O │ H-P │ ESC │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │CTRL │ H-A │ H-S │ H-D │ H-F │ H-G │   │  ←  │  ↓  │  ↑  │  →  │     │H-TAB│
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │SHFT │ H-Z │ H-X │ H-C │ H-V │ H-B │   │ H-N │ H-M │ H-, │ H-. │     │     │
+         * └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+         *                   │ ALT │     │GUI/⏎│   │ ### │     │     │
+         *                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
+         * H- = Hyper (Ctrl+Alt+Shift+Gui)
+         */
+        hyper_layer {
+            bindings = <
+   &kp TAB    &kp LC(LA(LS(LG(Q))))  &kp LC(LA(LS(LG(W))))  &kp LC(LA(LS(LG(E))))  &kp LC(LA(LS(LG(R))))  &kp LC(LA(LS(LG(T))))      &kp LC(LA(LS(LG(Y))))  &kp LC(LA(LS(LG(U))))  &kp LC(LA(LS(LG(I))))      &kp LC(LA(LS(LG(O))))    &kp LC(LA(LS(LG(P))))  &kp ESC
+   &kp LCTRL  &kp LC(LA(LS(LG(A))))  &kp LC(LA(LS(LG(S))))  &kp LC(LA(LS(LG(D))))  &kp LC(LA(LS(LG(F))))  &kp LC(LA(LS(LG(G))))      &kp LEFT               &kp DOWN               &kp UP                     &kp RIGHT                &none                  &kp LC(LA(LS(LG(TAB))))
+   &kp LSHFT  &kp LC(LA(LS(LG(Z))))  &kp LC(LA(LS(LG(X))))  &kp LC(LA(LS(LG(C))))  &kp LC(LA(LS(LG(V))))  &kp LC(LA(LS(LG(B))))      &kp LC(LA(LS(LG(N))))  &kp LC(LA(LS(LG(M))))  &kp LC(LA(LS(LG(COMMA))))  &kp LC(LA(LS(LG(DOT))))  &none                  &none
+                                     &kp LALT               &trans                 &gui_ent LGUI RET                                 &trans                 &trans                 &trans
+            >;
+        };
+    };
+};
