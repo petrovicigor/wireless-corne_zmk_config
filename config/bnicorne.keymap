@@ -19,7 +19,6 @@
             timeout-ms = <150>;
             key-positions = <38 12>;  // GUI/Enter thumb + Ctrl key
             bindings = <&kp LG(TAB)>;
-            slow-release;
         };
     };
 
