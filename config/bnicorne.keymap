@@ -98,6 +98,7 @@
             #binding-cells = <0>;
             bindings = <&kp LCTRL>, <&kp TAB>;
             mods = <(MOD_LGUI)>;
+            keep-mods = <(MOD_LGUI)>;
         };
     };
 
