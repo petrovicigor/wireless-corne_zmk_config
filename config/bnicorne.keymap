@@ -16,9 +16,10 @@
 
         // Cmd+Tab app switcher: GUI/Enter + Ctrl pressed together
         combo_cmd_tab {
-            timeout-ms = <100>;
+            timeout-ms = <150>;
             key-positions = <38 12>;  // GUI/Enter thumb + Ctrl key
             bindings = <&kp LG(TAB)>;
+            slow-release;
         };
     };
 
@@ -87,12 +88,13 @@
     /* ========== BEHAVIORS ========== */
     behaviors {
         // Hold-tap for GUI(hold)/Enter(tap) - left thumb
-        // hold-while-undecided sends LGUI immediately (like QMK's LGUI_T)
+        // Using urob's "timeless" approach for responsive mod-tap
         gui_ent: gui_enter {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
             hold-while-undecided;
         };
