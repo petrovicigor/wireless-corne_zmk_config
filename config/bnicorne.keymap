@@ -75,12 +75,15 @@
     /* ========== BEHAVIORS ========== */
     behaviors {
         // Hold-tap for GUI(hold)/Enter(tap) - left thumb
+        // hold-while-undecided sends LGUI immediately (like QMK's LGUI_T)
         gui_ent: gui_enter {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
+            hold-while-undecided;
+            quick-tap-ms = <200>;
         };
 
         // Layer-tap for Layer 4(hold)/Space(tap) - right thumb
