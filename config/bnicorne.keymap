@@ -10,15 +10,24 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+    /* ========== TRI-STATE (urob module) ========== */
+    /* Swapper for Cmd+Tab: holds Cmd while tapping, releases on key release */
+    swapper: swapper {
+        compatible = "zmk,behavior-tri-state";
+        #binding-cells = <0>;
+        bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
+        ignored-key-positions = <0 12>;  // Tab and Ctrl - allow repeated presses to cycle apps
+    };
+
     /* ========== COMBOS ========== */
     combos {
         compatible = "zmk,combos";
 
-        // Cmd+Tab app switcher: GUI/Enter + Ctrl pressed together
-        combo_cmd_tab {
-            timeout-ms = <150>;
-            key-positions = <38 12>;  // GUI/Enter thumb + Ctrl key
-            bindings = <&kp LG(TAB)>;
+        // Cmd+Tab app switcher: Ctrl + Tab pressed together triggers swapper
+        combo_app_switch {
+            timeout-ms = <50>;
+            key-positions = <0 12>;  // Tab key + Ctrl key
+            bindings = <&swapper>;
         };
     };
 
@@ -106,14 +115,6 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // Mod-morph: Ctrl normally, Tab when Cmd is held (for Cmd+Tab app switching)
-        ctrl_tab: ctrl_or_tab {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp LCTRL>, <&kp TAB>;
-            mods = <(MOD_LGUI)>;
-            keep-mods = <(MOD_LGUI)>;
-        };
     };
 
     /* ========== KEYMAP ========== */
@@ -136,7 +137,7 @@
         default_layer {
             bindings = <
    &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O    &kp P     &kp ESC
-   &ctrl_tab  &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
    &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sk LC(LA(LGUI))
                      &mo 2  &kp LALT  &gui_ent LGUI RET    &lt4_spc 4 SPACE  &kp BSPC  &mo 3
             >;
@@ -217,7 +218,7 @@
         hyper_layer {
             bindings = <
    &kp TAB    &kp LC(LA(LS(LG(Q))))  &kp LC(LA(LS(LG(W))))  &kp LC(LA(LS(LG(E))))  &kp LC(LA(LS(LG(R))))  &kp LC(LA(LS(LG(T))))      &kp LC(LA(LS(LG(Y))))  &kp LC(LA(LS(LG(U))))  &kp LC(LA(LS(LG(I))))      &kp LC(LA(LS(LG(O))))    &kp LC(LA(LS(LG(P))))  &kp ESC
-   &ctrl_tab  &kp LC(LA(LS(LG(A))))  &kp LC(LA(LS(LG(S))))  &kp LC(LA(LS(LG(D))))  &kp LC(LA(LS(LG(F))))  &kp LC(LA(LS(LG(G))))      &kp LEFT               &kp DOWN               &kp UP                     &kp RIGHT                &none                  &kp LC(LA(LS(LG(TAB))))
+   &kp LCTRL  &kp LC(LA(LS(LG(A))))  &kp LC(LA(LS(LG(S))))  &kp LC(LA(LS(LG(D))))  &kp LC(LA(LS(LG(F))))  &kp LC(LA(LS(LG(G))))      &kp LEFT               &kp DOWN               &kp UP                     &kp RIGHT                &none                  &kp LC(LA(LS(LG(TAB))))
    &kp LSHFT  &kp LC(LA(LS(LG(Z))))  &kp LC(LA(LS(LG(X))))  &kp LC(LA(LS(LG(C))))  &kp LC(LA(LS(LG(V))))  &kp LC(LA(LS(LG(B))))      &kp LC(LA(LS(LG(N))))  &kp LC(LA(LS(LG(M))))  &kp LC(LA(LS(LG(COMMA))))  &kp LC(LA(LS(LG(DOT))))  &none                  &none
                                      &kp LALT               &trans                 &gui_ent LGUI RET                                 &trans                 &trans                 &trans
             >;
