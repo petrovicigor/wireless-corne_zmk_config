@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 #
 
-if BOARD_BNICORNE_LEFT
+if BOARD_BLECORNE_LEFT
 
 config ZMK_KEYBOARD_NAME
     default "BLECORNE"
@@ -11,13 +11,10 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
-endif # BOARD_BNICORNE_LEFT
+endif # BOARD_BLECORNE_LEFT
 
 
-if BOARD_BNICORNE_LEFT || BOARD_BNICORNE_RIGHT
-
-config BOARD
-    default "blecorne"
+if BOARD_BLECORNE_LEFT || BOARD_BLECORNE_RIGHT
 
 config ZMK_SPLIT
     default y
@@ -51,10 +48,8 @@ if ZMK_DISPLAY
 config SPI
     default y
 
-
 config ZMK_DISPLAY_BLANK_ON_IDLE
     default n
-
 
 endif # ZMK_DISPLAY
 
@@ -70,4 +65,4 @@ menuconfig CUSTOM_WIDGET_LAYER_STATUS
 menuconfig CUSTOM_WIDGET_PERIPHERAL_STATUS
     bool "custom peripheral status widget"
 
-endif # BOARD_BNICORNE_LEFT || BOARD_BNICORNE_RIGHT
+endif # BOARD_BLECORNE_LEFT || BOARD_BLECORNE_RIGHT

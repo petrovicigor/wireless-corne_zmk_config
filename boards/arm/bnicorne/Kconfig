@@ -2,9 +2,3 @@
 # Copyright (c) 2022 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 #
-
-config BOARD_BNICORNE_LEFT
-    bool
-
-config BOARD_BNICORNE_RIGHT
-    bool

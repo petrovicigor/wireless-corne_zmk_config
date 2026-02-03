@@ -1,0 +1,11 @@
+boards:
+  - name: blecorne_left
+    full_name: Boardsource BLECORNE Left
+    vendor: boardsource
+    socs:
+    - name: nrf52840
+  - name: blecorne_right
+    full_name: Boardsource BLECORNE Right
+    vendor: boardsource
+    socs:
+    - name: nrf52840
