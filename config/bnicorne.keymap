@@ -115,6 +115,15 @@
             bindings = <&mo>, <&kp>;
         };
 
+        // MEH hold-tap: tap = ', hold = MEH (Ctrl+Alt+Shift)
+        meh_quot: meh_quote {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&sk>, <&kp>;
+        };
+
     };
 
     /* ========== KEYMAP ========== */
@@ -137,7 +146,7 @@
         default_layer {
             bindings = <
    &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T      &kp Y  &kp U  &kp I      &kp O    &kp P     &kp ESC
-   &kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G      &kp H  &kp J  &kp K      &kp L    &kp SEMI  &meh_quot LC(LA(LSHFT)) SQT
    &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B      &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &sk LC(LA(LGUI))
                      &mo 2  &kp LALT  &gui_ent LGUI RET    &lt4_spc 4 SPACE  &kp BSPC  &mo 3
             >;
