@@ -24,9 +24,3 @@ include:
     cmake-args: -DCONFIG_ZMK_STUDIO=y
   # Right half
   - board: blecorne_right
-  # Settings reset for left (flash this to clear bond data)
-  - board: blecorne_left
-    shield: settings_reset
-  # Settings reset for right (flash this to clear bond data)
-  - board: blecorne_right
-    shield: settings_reset
