@@ -104,7 +104,6 @@
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
             hold-while-undecided;
-            retro-tap;
         };
 
         // Layer-tap for Layer 4(hold)/Space(tap) - right thumb
