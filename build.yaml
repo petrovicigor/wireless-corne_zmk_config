@@ -18,9 +18,9 @@
 #
 ---
 include:
-  # Left half with ZMK Studio support
+  # Left half. ZMK Studio is off on purpose: with it on, the central half does
+  # not wake from deep sleep on a keypress (zmkfirmware/zmk#3195, Zephyr 4.1);
+  # only a USB plug-in woke it. The keymap is edited in config/bnicorne.keymap.
   - board: blecorne_left
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
   # Right half
   - board: blecorne_right

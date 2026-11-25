@@ -5,8 +5,9 @@
 
 CONFIG_ZMK_SLEEP=y
 # CONFIG_ZMK_DISPLAY=y
-CONFIG_ZMK_STUDIO=y 
-CONFIG_ZMK_STUDIO_LOCKING=n
+# ZMK Studio off: with it on the central half does not wake from deep sleep
+# (zmkfirmware/zmk#3195). See build.yaml.
+# CONFIG_ZMK_STUDIO is not set
 
 # Enable MPU
 CONFIG_ARM_MPU=y
