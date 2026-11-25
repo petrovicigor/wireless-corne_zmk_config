@@ -24,3 +24,8 @@ include:
   - board: blecorne_left
   # Right half
   - board: blecorne_right
+  # Diagnostic: left half with USB logging (serial over USB). Flash only to debug
+  # BLE drops, then go back to the normal blecorne_left artifact.
+  - board: blecorne_left
+    snippet: zmk-usb-logging
+    artifact-name: blecorne_left_usb_logging
